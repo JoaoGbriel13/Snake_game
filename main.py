@@ -20,26 +20,26 @@ screen.onkey(snake.move_right, "Right")
 food = Food()
 
 game = True
-speed = 0.050
+
+snake.generate_snake()
 while game:
     screen.update()
-    time.sleep(speed)
+    time.sleep(snake.speed)
     snake.move()
     if snake.head.distance(food) < 15:
         snake.ampliar_cobra()
         food.refresh()
         scoreboard.aumentar_pontuacao()
-        speed -= 0.002
+        snake.speed -= 0.002
     if snake.head.ycor() > 299 or snake.head.ycor() < - 299 or snake.head.xcor() > 299 or snake.head.xcor() < -299:
-        game = False
-        scoreboard.game_over()
+        scoreboard.reset()
+        snake.reset()
+        food.refresh()
 
     for parte in snake.turtles[1:]:
         if snake.head.distance(parte) < 10:
-            game = False
-            scoreboard.game_over()
-
-
-
+            scoreboard.reset()
+            snake.reset()
+            food.refresh()
 
 screen.exitonclick()

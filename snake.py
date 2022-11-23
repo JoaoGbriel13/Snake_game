@@ -4,7 +4,11 @@ from turtle import Turtle,Screen
 class Snake:
     def __init__(self):
         self.turtles = []
+
+
+    def generate_snake(self):
         count = 0
+        self.speed = 0.050
         for i in range(3):
             new = Turtle()
             new.color("white")
@@ -29,6 +33,12 @@ class Snake:
             new_ypos = self.turtles[turtle - 1].ycor()
             self.turtles[turtle].goto(x=new_xpos, y=new_ypos)
         self.turtles[0].forward(20)
+
+    def reset(self):
+        for turtle in self.turtles:
+            turtle.hideturtle()
+        self.turtles.clear()
+        self.generate_snake()
 
     def move_up(self):
         if self.head.heading() != 270:
